@@ -1,0 +1,68 @@
+Machine(c, s, f){
+	c = (_, 0, 1, )
+	s = (Mov, B, Bi, OK, )
+	f = (
+		f(Mov, 0) = {Mov, 0, >}
+		f(Mov, 1) = {Mov, 1, >}
+		f(Mov, _) = {B, _, <}
+		f(B, 0) = {B, 0, <}
+		f(B, 1) = {Bi, 1, <}
+		f(B, _) = {OK, _, >}
+		f(Bi, 0) = {Bi, 1, <}
+		f(Bi, 1) = {Bi, 0, <}
+		f(Bi, _) = {OK, _, >}
+	)
+	state = OK, target = OK
+}
+_10011100_
+ |
+Machine(c, s, f){
+	c = (_, 0, 1, x, y, #, )
+	s = (C0, C1, Ret, Search, OK, )
+	f = (
+		f(Search, 0) = {C0, x, >}
+		f(Search, 1) = {C1, y, >}
+		f(Search, #) = {OK, #, >}
+		f(C0, 0) = {C0, 0, >}
+		f(C0, 1) = {C0, 1, >}
+		f(C0, #) = {C0, #, >}
+		f(C0, _) = {Ret, 0, <}
+		f(C1, 0) = {C1, 0, >}
+		f(C1, 1) = {C1, 1, >}
+		f(C1, #) = {C1, #, >}
+		f(C1, _) = {Ret, 1, <}
+		f(Ret, 0) = {Ret, 0, <}
+		f(Ret, 1) = {Ret, 1, <}
+		f(Ret, #) = {Ret, #, <}
+		f(Ret, x) = {Search, 0, >}
+		f(Ret, y) = {Search, 1, >}
+	)
+	state = OK, target = OK
+}
+0110100#0110100
+|       ^
+Machine(c, s, f){
+	c = (_, ., /, k, )
+	s = (Init, Mdot, MDash, Ret, OK, )
+	f = (
+		f(Init, _) = {Init, _, >}
+		f(Init, .) = {Mdot, _, >}
+		f(Init, /) = {MDash, _, >}
+		f(Init, k) = {OK, k, >}
+		f(Mdot, .) = {Mdot, ., >}
+		f(Mdot, /) = {Mdot, /, >}
+		f(Mdot, k) = {Mdot, k, >}
+		f(Mdot, _) = {Ret, ., <}
+		f(MDash, .) = {MDash, ., >}
+		f(MDash, /) = {MDash, /, >}
+		f(MDash, k) = {MDash, k, >}
+		f(MDash, _) = {Ret, /, <}
+		f(Ret, .) = {Ret, ., <}
+		f(Ret, /) = {Ret, /, <}
+		f(Ret, k) = {Ret, k, <}
+		f(Ret, _) = {Init, _, >}
+	)
+	state = OK, target = OK
+}
+_________________k/././../.../..../
+|                 ^
